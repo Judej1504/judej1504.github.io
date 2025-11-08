@@ -1,7 +1,6 @@
-
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-var url = `https://ests.sctools.org/api/get/{id}=`;
+var url = `https://subscribercount.app/api/get?platform=youtube&type=channel&id=`;
 
 const chart = new Highcharts.chart({
 	chart: {
@@ -154,7 +153,7 @@ function search() {
 	const prompt = window.prompt("Enter channel name, ID, or URL.");
 	if (prompt)
 		fetch(
-			`https://axern.space/api/search?platform=youtube&type=channel&query=${prompt}`
+			`https://subscribercount.app/api/search?platform=youtube&type=channel&query=${prompt}`
 		)
 			.then((res) => res.json())
 			.then((data) => {
