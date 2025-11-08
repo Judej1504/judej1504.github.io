@@ -16,13 +16,13 @@
 
   FRAMERATE = 30;
 
-  DURATION = 2000;
+  DURATION = 1000;
 
-  COUNT_FRAMERATE = 20;
+  COUNT_FRAMERATE = 30;
 
-  FRAMES_PER_VALUE = 2;
+  FRAMES_PER_VALUE = 0.5;
 
-  DIGIT_SPEEDBOOST = .5;
+  DIGIT_SPEEDBOOST = 2;
 
   MS_PER_FRAME = 1000 / FRAMERATE;
 
@@ -641,7 +641,7 @@
   }
 
   if (typeof define === 'function' && define.amd) {
-    define([], function() {
+    define(['jquery'], function() {
       return Odometer;
     });
   } else if (typeof exports !== "undefined" && exports !== null) {
