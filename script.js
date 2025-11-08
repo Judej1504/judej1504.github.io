@@ -153,7 +153,7 @@ function search() {
 	const prompt = window.prompt("Enter channel name, ID, or URL.");
 	if (prompt)
 		fetch(
-			`https://subscribercount.app/api/search?platform=youtube&type=channel&query=${prompt}`
+			`https://axern.space/api/search?platform=youtube&type=channel&query=${prompt}`
 		)
 			.then((res) => res.json())
 			.then((data) => {
