@@ -1,9 +1,5 @@
 body {
-  --odoSpeed: 2s;
-  --colorSpeed: 2s;
-  --color: white;
-  --upColor: lime;
-  --downColor: red;
+  --speed: 2s;
 }
 
 .odometer.odometer-auto-theme,
