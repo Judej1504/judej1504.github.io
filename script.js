@@ -2,6 +2,16 @@ const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
 var url = `https://backend.mixerno.space/api/youtube/estv3/`; 
 
+    setInterval(() => {
+        fetch(
+                `https://mixerno.space/api/youtube-channel-counter/user/`
+            )
+            .then((res) => res.json())
+            .then((data) => {
+                document.getElementById("subs1").innerHTML = data.counts[0].count;
+            });
+    }, 2000);
+
 const chart = new Highcharts.chart({
 	chart: {
 		renderTo: "chart",
@@ -153,7 +163,7 @@ function search() {
 	const prompt = window.prompt("Enter channel name, ID, or URL.");
 	if (prompt)
 		fetch(
-			`https://mixerno.space/api/youtube-channel-counter/search/`
+			`https://mixerno.space/api/youtube-channel-counter/search/${channelName}`
 		)
 			.then((res) => res.json())
 			.then((data) => {
