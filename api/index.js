@@ -7,25 +7,27 @@ const app = express();
 app.use(cors());
 
 // API route to get YouTube live subscriber count
-app.get("/youtube-subcount/:channelId", async (req, res) => {
+app.get("/api/youtube-subcount/:channelId", async (req, res) => {
   const { channelId } = req.params;
 
   try {
     // Fetch data from the external API
-    const response = await axios.get(
-      `https://livecounts.xyz/api/youtube-live-subscriber-count/live/${channelId}`
+    const response = await fetch(
+      `https://ests.sctools.org/api/get/${channelId}`
     );
-    const respons2e = await axios.get(
+      const respons2e = await fetch(
       `https://backend.mixerno.space/api/youtube/estv3/${channelId}`
     );
-    const subCount = response.data.counts[0];
-    const totalViews = response.data.counts[1];
-    const apiViews = respons2e.data.items[0].statistics.viewCountAPI;
-    const apiSubCount = respons2e.data.items[0].statistics.subscriberCountAPI;
-    const videos = respons2e.data.items[0].statistics.videoCount;
-    const channelLogo = respons2e.data.items[0].snippet.thumbnails.default.url;
-    const channelName = respons2e.data.items[0].snippet.title;
-    const channelBanner = respons2e.data.items[0].brandingSettings.image;
+    const info = await response.json();
+    const inf2o = await respons2e.json();
+    const subCount = info.stats.estCount;
+    const totalViews = info.stats.viewCount;
+    const apiViews = inf2o.items[0].statistics.viewCountAPI;
+    const apiSubCount = info.stats.apiCount;
+    const videos = info.stats.videoCount;
+    const channelLogo = info.info.avatar;
+    const channelName = info.info.name;
+    const channelBanner = `https://www.banner.yt/${channelId}`;
 
     res.json({
       stats: { subCount, totalViews, apiSubCount, videos, apiViews },
@@ -37,41 +39,50 @@ app.get("/youtube-subcount/:channelId", async (req, res) => {
   }
 });
 
-app.get("/youtube-subcount/studio/:channelId", async (req, res) => {
+app.get("/api/youtube-subcount/studio/:channelId", async (req, res) => {
   const { channelId } = req.params;
 
   try {
     // Fetch data from the external API
     const response = await fetch(
-      `https://cors.stats100.xyz/https://studio.nia-statistics.com/api/channel/${channelId}`
+      `https://api-v2.nextcounts.com/api/youtube/channel/${channelId}`
     );
     const respons2e = await axios.get(
       `https://backend.mixerno.space/api/youtube/estv3/${channelId}`
     );
     const info = await response.json();
-    const subCount = info.channels.counts[2].count;
-    const viewCount = info.channels.counts[1].count;
+    if (info.verifiedSubCount === false) {
+   const success = "Not in studio."
+
+   res.json({
+   success
+});
+};
+  if (info.verifiedSubCount === true) {
+    const subCount = info.subcount;
+    const viewCount = info.viewcount;
     const apiSubCount = respons2e.data.items[0].statistics.subscriberCountAPI;
     const videos = respons2e.data.items[0].statistics.videoCount;
     const apiViews = respons2e.data.items[0].statistics.viewCountAPI;
-    const channelLogo = info.currentChannels.image;
+    const channelLogo = info.userImg;
     const channelName = respons2e.data.items[0].snippet.title;
-    const channelBanner = respons2e.data.items[0].brandingSettings.image;
+    const channelBanner = `https://www.banner.yt/${channelId}`;
 
     res.json({
       stats: { subCount, viewCount, apiSubCount, videos, apiViews },
       item: { channelLogo, channelName, channelBanner },
     });
+}
   } catch (error) {
     console.error(error);
     res.status(200).json({ success: "Not in studio." });
   }
 });
 
-app.get("/mrbeast/youtube-subcount/", async (req, res) => {
+app.get("/api/mrbeast/youtube-subcount/", async (req, res) => {
   try {
     // Fetch data from the external API
-    const response = await axios.get(`https://mrb.toasted.dev/count`);
+    const response = await axios.get(`https://mrbeast.subscribercount.app/data`);
     const respons2e = await axios.get(
       `https://backend.mixerno.space/api/youtube/estv3/UCX6OQ3DkcsbYNE6H8uQQuVA`
     );
@@ -84,7 +95,7 @@ app.get("/mrbeast/youtube-subcount/", async (req, res) => {
     const apiViews = respons2e.data.items[0].statistics.viewCountAPI;
     const channelLogo = respons2e.data.items[0].brandingSettings.image;
     const channelName = respons2e.data.items[0].snippet.title;
-    const channelBanner = respons2e.data.items[0].brandingSettings.image;
+    const channelBanner = `https://www.banner.yt/UCX6OQ3DkcsbYNE6H8uQQuVA`;
 
     res.json({
       stats: {
@@ -103,5 +114,8 @@ app.get("/mrbeast/youtube-subcount/", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch subscriber count" });
   }
 });
+
+
+app.listen(6942, () => console.log("Server ready on port 3000."));
 
 module.exports = app;
