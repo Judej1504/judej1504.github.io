@@ -1,6 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-var url = `https://subscribercount.app/api/get?platform=youtube&type=channel&id=`;
+const data = await fetch(
+      `https://ests.sctools.org/api/get/${channelId}`;
 
 const chart = new Highcharts.chart({
 	chart: {
