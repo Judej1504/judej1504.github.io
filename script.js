@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-var url = `https://backend.mixerno.space/api/youtube/estv3/${id}`; 
+var url = `https://backend.mixerno.space/api/youtube/estv3/id`; 
 
 const chart = new Highcharts.chart({
 	chart: {
