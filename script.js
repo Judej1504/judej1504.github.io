@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-var url = `https://subscribercount.app/api/get?platform=youtube&type=channel&id=`;
+var url = `https://mixerno.space/api/youtube-channel-counter/user/${channels[i]}`;
 
 const chart = new Highcharts.chart({
 	chart: {
