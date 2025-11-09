@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-var url = `https://mixerno.space/api/youtube-channel-counter/user/`; 
+var url = `https://backend.mixerno.space/api/youtube/estv3/`; 
 
 const chart = new Highcharts.chart({
 	chart: {
@@ -129,12 +129,12 @@ function getdata(a) {
 	fetch(url + a)
 		.then((res) => res.json())
 		.then((data) => {
-document.getElementById('c').innerHTML = data.subscribers;	
-      document.getElementById("avatar").src = data.snippet.thumbnails.high.url;
+document.getElementById('c').innerHTML = data.items[0].statistics.subscriberCount;	
+			document.getElementById("avatar").src = data.snippet.thumbnails.high.url;
 			document.getElementById("title").textContent = data.snippet.title;
 			if (chart.series[0].points.length >= 3600)
 				chart.series[0].data[0].remove();
-			chart.series[0].addPoint([Date.now(), data.subscribers]);
+			chart.series[0].addPoint([Date.now(), data.items[0].statistics.subscriberCount]);
 		});
 }
 
@@ -153,7 +153,8 @@ function search() {
 	const prompt = window.prompt("Enter channel name, ID, or URL.");
 	if (prompt)
 		fetch(
-			`https://mixerno.space/api/youtube-channel-counter/search/${channelName}`
+			`https://mixerno.space/api/youtube-channel-counter/search/${id}`
+			 
 		)
 			.then((res) => res.json())
 			.then((data) => {
