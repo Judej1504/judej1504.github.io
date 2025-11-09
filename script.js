@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-var url = `https://ests.sctools.org/api/get/{id}`;
+var url = `https://ests.sctools.org/api/get/${channelId}`;
 
 const chart = new Highcharts.chart({
 	chart: {
