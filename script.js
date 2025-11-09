@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-var url = `https://backend.mixerno.space/api/youtube/estv3/`; 
+var url = `https://mixerno.space/api/youtube-channel-counter/${channelName}`; 
 
 const chart = new Highcharts.chart({
 	chart: {
@@ -153,7 +153,7 @@ function search() {
 	const prompt = window.prompt("Enter channel name, ID, or URL.");
 	if (prompt)
 		fetch(
-			`https://subscribercount.app/api/search?platform=youtube&type=channel&query=${prompt}`
+			`https://mixerno.space/api/youtube-channel-counter/search/${channelName}`
 		)
 			.then((res) => res.json())
 			.then((data) => {
