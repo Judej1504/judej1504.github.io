@@ -1,7 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-const data = await fetch(
-      `https://ests.sctools.org/api/get/${channelId}`;
+var url = `https://mixerno.space/api/youtube-channel-counter/user/${channelId}`;
 
 const chart = new Highcharts.chart({
 	chart: {
