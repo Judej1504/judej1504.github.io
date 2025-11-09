@@ -1,16 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 var id = params.get("id") || "UCX6OQ3DkcsbYNE6H8uQQuVA";
-var url = `https://backend.mixerno.space/api/youtube/estv3/`; 
-
-    setInterval(() => {
-        fetch(
-                `https://mixerno.space/api/youtube-channel-counter/user/`
-            )
-            .then((res) => res.json())
-            .then((data) => {
-                document.getElementById("subs1").innerHTML = data.counts[0].count;
-            });
-    }, 2000);
+var url = `https://mixerno.space/api/youtube-channel-counter/user/`; 
 
 const chart = new Highcharts.chart({
 	chart: {
@@ -139,12 +129,12 @@ function getdata(a) {
 	fetch(url + a)
 		.then((res) => res.json())
 		.then((data) => {
-document.getElementById('c').innerHTML = data.subscriberCount;	
+document.getElementById('c').innerHTML = data.subscribers;	
       document.getElementById("avatar").src = data.snippet.thumbnails.high.url;
 			document.getElementById("title").textContent = data.snippet.title;
 			if (chart.series[0].points.length >= 3600)
 				chart.series[0].data[0].remove();
-			chart.series[0].addPoint([Date.now(), data.subscriberCount]);
+			chart.series[0].addPoint([Date.now(), data.subscribers]);
 		});
 }
 
