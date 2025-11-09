@@ -153,7 +153,7 @@ function search() {
 	const prompt = window.prompt("Enter channel name, ID, or URL.");
 	if (prompt)
 		fetch(
-			`https://mixerno.space/api/youtube-channel-counter/search/${channelName}`
+			`https://mixerno.space/api/youtube-channel-counter/search/`
 		)
 			.then((res) => res.json())
 			.then((data) => {
