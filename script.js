@@ -130,11 +130,11 @@ function getdata(a) {
 		.then((res) => res.json())
 		.then((data) => {
 document.getElementById('c').innerHTML = data.items[0].statistics.subscriberCount;	
-			document.getElementById("avatar").src = data.items[0].brandingSettings.image;
+			document.getElementById("avatar").src = data.items[0].snippet.thumbnails.default.url;
 			document.getElementById("title").textContent = data.items[0].snippet.title;
 			if (chart.series[0].points.length >= 3600)
 				chart.series[0].data[0].remove();
-			chart.series[0].addPoint([Date.now(), data.items[0].stats.estCount]);
+			chart.series[0].addPoint([Date.now(), data.items[0].statistics.subscriberCount]);
 		});
 }
 
