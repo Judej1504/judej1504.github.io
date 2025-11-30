@@ -6,7 +6,7 @@
 }
 
 html {
-  --background: black;
+  --background: transparent;
   --header-background: black;
   --text-primary: white;
   --text-secondary: #aaa;
